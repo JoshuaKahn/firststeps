@@ -40,7 +40,17 @@ sudo usermod -aG docker $USER 	#allows non-sudo users to run docker
 Log off and log on, then run `docker run hello-world` to test the group addition.
 
 ## Jenkins Initial Setup w/ Dockerfile
-Now, we need to install Jenkins via Docker. The following command does this, but also sets the port for entry as the local host rather than an ip address broadcasted across the internet.
+Now, we need to install Jenkins via Docker. We first pull the image:
+```
+docker pull jenkins/jenkins:lts
+```
+Then, navigate to the folder containing the .dockerignore and 'Dockerfile' files, then run the following command using the given directory:
+
+`docker build -f /path/to/file/Dockerfile .`
+
+We now want to create a new container, using the image we just created. To find the name of the image, type `docker images` and find the most recently created image.
+
+The following command creates the new container, but also sets the port for entry as the local host rather than an ip address broadcasted across the internet.
 ```
 docker run \
 -u root \
@@ -48,16 +58,13 @@ docker run \
 -p 127.0.0.1:9090:8080 \
 -v jenkins-data:/var/jenkins_home \
 -v /var/run/docker.sock:/var/run/docker.sock \
-jenkins/jenkins:lts
+NEW_IMAGE_NAME_HERE
 ```
 Copy the pin generated in the terminal log and exit (via Ctrl + C). 
-Then, navigate to the folder containing the .dockerignore and 'Dockerfile' files, then run the following command using the given directory:
 
-`docker build -f /path/to/file/Dockerfile .`
+Log into localhost:9090.html using the pin code generated from the log output, and set credentials (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker start jenkins`.
 
-Log into localhost:9090.html using the pin code generated from the log output, and set credentials (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker ps -a` into the terminal and find the most recently created container, then `docker start *given name/Container ID*`.
-
-It is recommended that you complete the last two commands regardless, as it will be these containers that you use to manage the server.
+The `docker start jenkins` command is how to start the server again if the machine was restarted.
 
 ## BeagleBone setup
 Connect the BeagleBone Black to the server via USB. Then, [download the following script to the server and run it as sudo.](beagleboard.org/static/Drivers/Linux/FTDI/mkudevrule.sh)
