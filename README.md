@@ -73,13 +73,13 @@ Connect the Beaglebone Black to the internet via an Ethernet port, then install 
 This is so Jenkins' slave software can use the BeagleBone as a node for testing/flashing. It is now fine to disconnect the BeagleBone Black from the internet.
 
 Finally, we must implement the ST-Link flashing software onto the beaglebone. Download the source from [here](https://github.com/texane/stlink) and transfer it over to the beaglebone via ssh transfer via SCP.
-`sudo scp source_file_here.tar  debian@192.168.7.2:/home/debian`
+```sudo scp source_file_here.tar  debian@192.168.7.2:/home/debian```
 Extract the tar file in its current directory and [follow the website's instructions on compiling from source.](https://github.com/texane/stlink/blob/master/doc/compiling.md)
 
 ## Jenkins Configuration Setup
 ### Easy Method
 The easiest method of doing this is to use the already-configured XML files. To do this, go onto the server and execute the following command:
-`wget http://localhost:9090/jnlpJars/jenkins-cli.jar`
+```wget http://localhost:9090/jnlpJars/jenkins-cli.jar```
 This is to download the Command Line Interface for the server, which does not require anything running within the Docker container itself. Within the terminal, go to the folder where this was downloaded, import the given configuration files, and run the following:
 
 ```
@@ -98,7 +98,11 @@ Create a new node (Manage Jenkins→ Manage Nodes → New Node) with the followi
 2. Name = Test_slave (or anything else to distinguish it)
 3. Directory may change depending on name of BeagleBone and/or the account used.
 5. Launch Slave Agents via SSH, and 'Manually trusted Key Verification Strategy'
-6. For SSH credentials, use the credentials given for the debian account (or the account used.)
+6. For SSH credentials, use the credentials given for the debian account (or the account used.) This you will have to enter.
 7. Use this node as much as possible and keep online as much as possible.
-#### Credentials
-Manage Je
+#### Job
+Create a new job with the following settings:
+1. Multibranch Pipeline
+2. Select 'git' as a branch source. Enter the git's address and add an 'SSH username with private key' credential to access it (with a given private key.)
+3. Build configuration by Jenkinsfile
+4. Turn OFF Discard Old Items
