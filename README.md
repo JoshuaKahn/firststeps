@@ -113,3 +113,6 @@ Create a new job with the following settings:
 2. Select 'git' as a branch source. Enter the git's address and add an 'SSH username with private key' credential to access it (with a given private key.)
 3. Build configuration by Jenkinsfile
 4. Turn OFF Discard Old Items
+
+##End
+You are done!
