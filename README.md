@@ -104,6 +104,9 @@ Create a new node (Manage Jenkins→ Manage Nodes → New Node) with the followi
 5. Launch Slave Agents via SSH, and 'Manually trusted Key Verification Strategy'
 6. For SSH credentials, use the credentials given for the debian account (or the account used.) This you will have to enter.
 7. Use this node as much as possible and keep online as much as possible.
+
+##Complete
+You are done! Test that everything is complete by running a test build.
 #### Job
 Create a new job with the following settings:
 1. Multibranch Pipeline
