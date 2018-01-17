@@ -71,3 +71,18 @@ Connect the Beaglebone Black to the internet via an Ethernet port, then install 
 `sudo apt-get install default-jdk`
 
 This is so Jenkins' slave software can use the BeagleBone as a node for testing/flashing. It is now fine to disconnect the BeagleBone Black from the internet.
+
+## Jenkins Configuration Setup
+### Easy Method
+The easiest method of doing this is to use the already-configured XML files. To do this, go onto the server and execute the following command:
+`wget http://localhost:9090/jnlpJars/jenkins-cli.jar`
+This is to download the Command Line Interface for the server, which does not require anything running within the Docker container itself. Within the terminal, go to the folder where this was downloaded, import the given configuration files, and run the following commands:
+
+```
+java -jar jenkins-cli.jar -s http://localhost:9090 create-credentials-by-xml system::system::jenkins "(global)"< beagle.xml
+java -jar jenkins-cli.jar -s http://localhost:9090 create-credentials-by-xml system::system::jenkins "(global)"< git.xml
+
+java -jar jenkins-cli.jar -s http://localhost:9090 create-job STM < stmtest.xml
+java -jar jenkins-cli.jar -s http://localhost:9090 create-node ARMslave < test_slave.xml
+```
+This will automatically install the beaglebone slave node's and the git's credentials, creates the server required for testing, and implements the BeagleBone as a slave.
