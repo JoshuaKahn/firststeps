@@ -67,13 +67,17 @@ Make sure you can connect to your BeagleBone by navigating to http://192.168.7.2
 If connecting to Debian, the password is *temppwd*. 
 
 Connect the Beaglebone Black to the internet via an Ethernet port, then install Java by typing:
-`sudo apt-get update`
-`sudo apt-get install default-jdk`
+```
+sudo apt-get update
+sudo apt-get install default-jdk
+```
 
 This is so Jenkins' slave software can use the BeagleBone as a node for testing/flashing. It is now fine to disconnect the BeagleBone Black from the internet.
 
 Finally, we must implement the ST-Link flashing software onto the beaglebone. Download the source from [here](https://github.com/texane/stlink) and transfer it over to the beaglebone via ssh transfer via SCP.
+
 ```sudo scp source_file_here.tar  debian@192.168.7.2:/home/debian```
+
 Extract the tar file in its current directory and [follow the website's instructions on compiling from source.](https://github.com/texane/stlink/blob/master/doc/compiling.md)
 
 ## Jenkins Configuration Setup
