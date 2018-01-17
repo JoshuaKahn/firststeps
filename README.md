@@ -93,7 +93,7 @@ java -jar jenkins-cli.jar -s http://localhost:9090 create-credentials-by-xml sys
 java -jar jenkins-cli.jar -s http://localhost:9090 create-job STM < stmtest.xml
 java -jar jenkins-cli.jar -s http://localhost:9090 create-node ARMslave < test_slave.xml
 ```
-This will automatically install the beaglebone slave node's and the git's credentials, creates the server required for testing, and implements the BeagleBone as a slave.
+This will automatically install the beaglebone slave node's and the git's credentials, creates the server required for testing, and implements the BeagleBone as a slave. You will still need to enter the passwords for the credentials, however; to do this, head to Credentials->Global (Jenkins) then click on the given credential and enter it. 
 ### Hard Method
 If the above does not work, you will have to implement the server manually. Log onto the server via the html address and follow the instructions below.
 #### Node
