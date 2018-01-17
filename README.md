@@ -1,5 +1,5 @@
 # Readme
-This document outlines the process of setting up a Jenkins Server.
+This document outlines the process of setting up a Jenkins Server via Docker with a BeagleBone Black slave.
 
 ## What's required?
 * Docker
