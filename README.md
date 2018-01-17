@@ -7,7 +7,7 @@ This document outlines the process of setting up a Jenkins Server.
 * BeagleBone Black
 
 ## Docker Installation
-We first add the repo key:
+We first allow apt-get to install over https, and add Docker's official GPG key:
 ```
 sudo apt-get update
 sudo apt-get install \
@@ -37,4 +37,22 @@ Finally, we need to add Docker to usergroups so that we don't need to write 'sud
 sudo groupadd docker
 sudo usermod -aG docker $USER 	#allows non-sudo users to run docker
 ```
-Log off and log on, then run `docker run hello-world`
+Log off and log on, then run `docker run hello-world` to test the group addition.
+
+## Jenkins Initial Setup w/ Dockerfile
+Now, we need to install Jenkins via Docker. The following command does this, but also sets the port for entry as the local host rather than an ip address broadcasted across the internet.
+```
+docker run \
+-u root \
+--name jenkins \
+-p 127.0.0.1:9090:8080 \
+-v jenkins-data:/var/jenkins_home \
+-v /var/run/docker.sock:/var/run/docker.sock \
+jenkins/jenkins:lts
+```
+Then, navigate to the folder containing the .dockerignore and 'Dockerfile' files, then run the following command using the given directory:
+
+`docker build -f /path/to/file/Dockerfile .`
+
+Log into localhost:9090.html using the pin code generated from the log output (which you exit from by using Ctrl+C), and set credentials (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker start jenkins` into the terminal.
+
