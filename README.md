@@ -17,7 +17,7 @@ sudo apt-get install \
     software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
-We then verify that Docker's fingerprint is correct, by checking [online](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository)
+We then verify that Docker's fingerprint is correct, by checking [online](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository):
 ```
 sudo apt-key fingerprint 0EBFCD88 	
 ```
