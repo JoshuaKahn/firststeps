@@ -50,9 +50,24 @@ docker run \
 -v /var/run/docker.sock:/var/run/docker.sock \
 jenkins/jenkins:lts
 ```
+Copy the pin generated in the terminal log and exit (via Ctrl + C). 
 Then, navigate to the folder containing the .dockerignore and 'Dockerfile' files, then run the following command using the given directory:
 
 `docker build -f /path/to/file/Dockerfile .`
 
-Log into localhost:9090.html using the pin code generated from the log output (which you exit from by using Ctrl+C), and set credentials (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker start jenkins` into the terminal.
+Log into localhost:9090.html using the pin code generated from the log output, and set credentials (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker ps -a` into the terminal and find the most recently created container, then `docker start *given name/Container ID*`.
 
+It is recommended that you complete the last two commands regardless, as it will be these containers that you use to manage the server.
+
+## BeagleBone setup
+Connect the BeagleBone Black to the server via USB. Then, [download the following script to the server and run it as sudo.](beagleboard.org/static/Drivers/Linux/FTDI/mkudevrule.sh)
+
+Make sure you can connect to your BeagleBone by navigating to http://192.168.7.2/ in your web browser, then type the following to connect to the BeagleBone:
+`ssh 192.168.7.2 -l debian`
+If connecting to Debian, the password is *temppwd*. 
+
+Connect the Beaglebone Black to the internet via an Ethernet port, then install Java by typing:
+`sudo apt-get update`
+`sudo apt-get install default-jdk`
+
+This is so Jenkins' slave software can use the BeagleBone as a node for testing/flashing. It is now fine to disconnect the BeagleBone Black from the internet.
