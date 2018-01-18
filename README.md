@@ -65,7 +65,7 @@ docker run \
 -v /var/run/docker.sock:/var/run/docker.sock \
 serversetup
 ```
-Copy the pin generated in the terminal log and log into localhost:9090.html using the pin code. Set credentials to something you can remember (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker start jenkins`(The `docker start jenkins` command is how to start the server again if the server machine was restarted.)
+Copy the pin generated in the terminal log and log into localhost:9090.html using the pin code. Set credentials to something you can remember (this can be disabled later in Manage Jenkins->Security), and make sure to install the recommended plugins. If Jenkins has not started (and thus the server page is unavaliable), then enter `docker start jenkins`(The `docker start jenkins` command is how to start the server again if the server machine was restarted.)
 
 Once you reach the server's main page, type Ctrl + C into terminal to close the log. You'll need to start the container again after you do this.
 
