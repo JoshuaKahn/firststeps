@@ -108,7 +108,7 @@ If the above does not work, you will have to implement the server manually. Log 
 #### Node
 Create a new node (Manage Jenkins→ Manage Nodes → New Node) with the following settings:
 1. Permanent Agent
-2. Name = Test_slave (or anything else to distinguish it)
+2. Name = Test_slave (or anything else to distinguish it) with home directory `/home/debian`
 3. Directory may change depending on name of BeagleBone and/or the account used.
 5. Launch Slave Agents via SSH, and 'Manually trusted Key Verification Strategy'
 6. For SSH credentials, use the credentials given for the debian account (or the account used.) This you will have to enter.
