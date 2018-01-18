@@ -90,7 +90,7 @@ Finally, we must implement the ST-Link flashing software onto the beaglebone. Do
 Extract the tar file in its current directory and [follow the website's instructions on compiling from source.](https://github.com/texane/stlink/blob/master/doc/compiling.md)
 
 ## Jenkins Configuration Setup
-Before following the below methods, you must first install slave plugins. Go to Manage Jenkins->Manage Plugins->Avaliable and install the SSH Slaves, SSH Agent, SSH Credentials, Pipeline: Multibranch, Pipeline Utility steps, Pipeline Model Definition, Pipeline Model API, Pipeline Basic Steps, Pipeline Node and Processes, Pipeline Shared Groovy Libraries and the Git SCM plugins.
+Before following the below methods, you must first install slave plugins. Go to Manage Jenkins->Manage Plugins->Avaliable and install the SSH Slaves, SSH Agent, SSH Credentials, Pipeline: Multibranch, Pipeline Utility steps, Pipeline Model Definition, Pipeline Model API, Pipeline Basic Steps, Pipeline Node and Processes, Pipeline Shared Groovy Libraries, Build Pipeline, Pipeline Multibrach with defaults, Delivery Pipeline and the Git SCM plugins.
 
 ### Easy Method
 The easiest method of doing this is to use the already-configured XML files. To do this, go onto the server and execute the following command:
