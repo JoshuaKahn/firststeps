@@ -46,9 +46,9 @@ docker pull jenkins/jenkins:lts
 ```
 Then, navigate to the folder containing the .dockerignore and 'Dockerfile' files, then run the following command using the given directory:
 
-`docker build -f /path/to/file/Dockerfile .`
+`docker build -t serversetup -f /path/to/file/Dockerfile .`
 
-We now want to create a new container, using the image we just created. To find the name of the image, type `docker images` and find the most recently created image.
+We now want to create a new container, using the image we just created. The name of the image is 'serversetup' as we defined it as such when building.
 
 The following command creates the new container, but also sets the port for entry as the local host rather than an ip address broadcasted across the internet.
 ```
@@ -58,13 +58,15 @@ docker run \
 -p 127.0.0.1:9090:8080 \
 -v jenkins-data:/var/jenkins_home \
 -v /var/run/docker.sock:/var/run/docker.sock \
-NEW_IMAGE_NAME_HERE
+serversetup
 ```
 Copy the pin generated in the terminal log and exit (via Ctrl + C). 
 
 Log into localhost:9090.html using the pin code generated from the log output, and set credentials (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker start jenkins`.
 
 The `docker start jenkins` command is how to start the server again if the machine was restarted.
+
+If it asks for username and password, they are 'admin' and the pin from the log, respectively.
 
 ## BeagleBone setup
 Connect the BeagleBone Black to the server via USB. Then, [download the following script to the server and run it as sudo.](beagleboard.org/static/Drivers/Linux/FTDI/mkudevrule.sh)
