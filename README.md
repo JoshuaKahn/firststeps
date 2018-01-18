@@ -50,7 +50,12 @@ Then, navigate to the folder containing the .dockerignore and 'Dockerfile' files
 
 We now want to create a new container, using the image we just created. The name of the image is 'serversetup' as we defined it as such when building.
 
-The following command creates the new container, but also sets the port for entry as the local host rather than an ip address broadcasted across the internet.
+To begin, we create the volume that the Jenkins data will reside in. If you must ever reinstall Jenkins, make sure to delete this as well as the images/containers!
+```
+docker volume create jenkins-data
+```
+
+Next, the following command creates the new container, but also sets the port for entry as the local host rather than an ip address broadcasted across the internet.
 ```
 docker run \
 -u root \
@@ -60,13 +65,9 @@ docker run \
 -v /var/run/docker.sock:/var/run/docker.sock \
 serversetup
 ```
-Copy the pin generated in the terminal log and exit (via Ctrl + C). 
+Copy the pin generated in the terminal log and log into localhost:9090.html using the pin code. Set credentials to something you can remember (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker start jenkins`(The `docker start jenkins` command is how to start the server again if the server machine was restarted.)
 
-Log into localhost:9090.html using the pin code generated from the log output, and set credentials (this can be disabled later in Manage Jenkins->Security). If Jenkins has not started (and thus the server page is unavaliable), then enter `docker start jenkins`.
-
-The `docker start jenkins` command is how to start the server again if the machine was restarted.
-
-If it asks for username and password, they are 'admin' and the pin from the log, respectively.
+Once you reach the server's main page, type Ctrl + C into terminal to close the log. You'll need to start the container again after you do this.
 
 ## BeagleBone setup
 Connect the BeagleBone Black to the server via USB. Then, [download the following script to the server and run it as sudo.](beagleboard.org/static/Drivers/Linux/FTDI/mkudevrule.sh)
