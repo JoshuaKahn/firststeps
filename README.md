@@ -90,6 +90,8 @@ Finally, we must implement the ST-Link flashing software onto the beaglebone. Do
 Extract the tar file in its current directory and [follow the website's instructions on compiling from source.](https://github.com/texane/stlink/blob/master/doc/compiling.md)
 
 ## Jenkins Configuration Setup
+Before following the below methods, you must first install slave plugins. Go to Manage Jenkins->Manage Plugins->Avaliable and install the SSH Slaves plugin, SSH Agent plugin, SSH Credentials plugin, Pipeline: Multibranch plugin and the Git SCM plugin.
+
 ### Easy Method
 The easiest method of doing this is to use the already-configured XML files. To do this, go onto the server and execute the following command:
 ```wget http://localhost:9090/jnlpJars/jenkins-cli.jar```
@@ -108,14 +110,15 @@ If the above does not work, you will have to implement the server manually. Log 
 #### Node
 Create a new node (Manage Jenkins→ Manage Nodes → New Node) with the following settings:
 1. Permanent Agent
-2. Name = Test_slave (or anything else to distinguish it) with home directory `/home/debian`
-3. Directory may change depending on name of BeagleBone and/or the account used.
+2. Name = Test_slave (or anything else to distinguish it) 
+3. Directory may change depending on name of BeagleBone and/or the account used (with home directory `/home/debian`)
 5. Launch Slave Agents via SSH, and 'Manually trusted Key Verification Strategy'
 6. For SSH credentials, use the credentials given for the debian account (or the account used.) This you will have to enter.
 7. Use this node as much as possible and keep online as much as possible.
+8. The SSH host is `192.168.7.2`.
 
-##Complete
-You are done! Test that everything is complete by running a test build.
+Launch the node. It will come up with an error; under 'Log' in the links, click 'Trust SSH Host Key'
+
 #### Job
 Create a new job with the following settings:
 1. Multibranch Pipeline
